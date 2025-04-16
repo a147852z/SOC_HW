@@ -1,46 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "xparameters.h"		// 參數集.
-#include "xgpio.h"	// 簡化PS對PL的GPIO操作的函數庫.
+#include "xparameters.h"
+#include "xil_io.h"
+#include "xil_printf.h"
 
-// 延遲用.
-void delay(int dly)
-{
-    int i, j;
-    for (i = 0; i < dly; i++) {
-    	for (j = 0; j < 0xffff; j++) {
-    		;
-        }
-    }
-}
+#define COUNTER_BASE_ADDR 0x43C00000  // 根據 block design 記憶體映射設定
 
-// 主程式.
-int main()
-{
-    XGpio LED_XGpio;		// 宣告一個GPIO用的結構
+int main() {
+    u32 threshold = 100; // 你要計數到的值
 
-    XGpio_Initialize(&LED_XGpio, XPAR_AXI_GPIO_0_DEVICE_ID);	// 初始化LED_XGpio.
-    XGpio_SetDataDirection(&LED_XGpio, 1, 0);		// 設置通道.
-    int LED_num[4] = {0b00000011, 0b00001100, 0b00110000, 0b11000000};
-    printf("Start!!!");
-    int i = 0;
-    while(1) {
-    	printf("LED_num = 0x%x\n", LED_num[i]);
+    xil_printf("Setting threshold to %d...\r\n", threshold);
 
-    	XGpio_DiscreteWrite(&LED_XGpio, 1, LED_num[i]);
+    Xil_Out32(COUNTER_BASE_ADDR, threshold);  // 寫入 AXI-Lite threshold 寄存器
 
-    	i = i + 1;
-
-        if (i >= 4) {
-            i = 0;
-        }
-    	delay(1000);
+    while (1) {
+        // 假設你也加入了讀回目前 count 值的 register，可加以下：
+        // u32 count = Xil_In32(COUNTER_BASE_ADDR + 4);
+        // xil_printf("Current Count: %d\\n", count);
     }
 
     return 0;
 }
-
-
-
-
-

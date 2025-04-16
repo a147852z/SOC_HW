@@ -8,12 +8,12 @@ entity counter_axi is
         clk      : in  std_logic;
         reset    : in  std_logic;
         btn      : in  std_logic;
+        threshold_val : in std_logic_vector(7 downto 0);
         O_LED    : out std_logic_vector(7 downto 0)
     );
 end counter_axi;
 
 architecture Behavioral of counter_axi is
-    signal threshold : std_logic_vector(7 downto 0) := (others => '0');
     signal count     : std_logic_vector(7 downto 0) := (others => '0');
     signal enable    : std_logic := '0';
 begin
@@ -33,7 +33,7 @@ begin
             count <= (others => '0');
         elsif rising_edge(clk) then
             if enable = '1' then
-                if count = threshold then
+                if count = threshold_val then
                     count <= (others => '0');
                 else
                     count <= count + 1;

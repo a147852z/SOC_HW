@@ -14,25 +14,41 @@ entity counter_axi is
 end counter_axi;
 
 architecture Behavioral of counter_axi is
-    signal count     : std_logic_vector(7 downto 0) := (others => '0');
-    signal enable    : std_logic := '0';
-    signal display   : std_logic_vector(7 downto 0);
+    signal count       : std_logic_vector(7 downto 0) := (others => '0');
+    signal enable      : std_logic := '0';
+    signal display     : std_logic_vector(7 downto 0);
+
+    -- 除頻器 (使用 counter bit 來產生 slow_clk)
+    signal tmp          : std_logic_vector(31 downto 0) := (others => '0');
+    signal slow_clk     : std_logic := '0';
 begin
 
-    -- 啟動使能（使用 btn 控制）
-    process(clk)
+    -- 除頻邏輯：讓 tmp 不斷累加，取其中一個位元作為慢速時脈
+    process(clk, reset)
     begin
-        if rising_edge(clk) then
+        if reset = '1' then
+            tmp <= (others => '0');
+        elsif rising_edge(clk) then
+            tmp <= tmp + 1;
+        end if;
+    end process;
+
+    slow_clk <= tmp(24);  -- 取第25位當作慢速時脈輸出（視時脈頻率調整）
+
+    -- 啟動使能（使用 btn 控制）
+    process(slow_clk)
+    begin
+        if rising_edge(slow_clk) then
             enable <= btn;
         end if;
     end process;
 
     -- 計數器
-    process(clk, reset)
+    process(slow_clk, reset)
     begin
         if reset = '1' then
             count <= (others => '0');
-        elsif rising_edge(clk) then
+        elsif rising_edge(slow_clk) then
             if enable = '1' then
                 if count = threshold_val then
                     count <= (others => '0');

@@ -67,10 +67,14 @@ begin
         led_map := (others => '0');
         for i in 0 to 3 loop
             case count(i*2+1 downto i*2) is
-                when "00" => led_map(i*2+0) := '1';
-                when "01" => led_map(i*2+1) := '1';
-                when "10" => led_map(i*2+0) := '1'; led_map(i*2+1) := '1';
-                when others => null;
+                -- when "00" => led_map(i*2+0) := '1';
+                -- when "01" => led_map(i*2+1) := '1';
+                -- when "10" => led_map(i*2+0) := '1'; led_map(i*2+1) := '1';
+                -- when others => null;
+                when "00" => null;  -- 不亮
+                when "01" => led_map(i*2+0) := '1';
+                when "10" => led_map(i*2+1) := '1';
+                when "11" => led_map(i*2+0) := '1'; led_map(i*2+1) := '1';
             end case;
         end loop;
         display <= led_map;

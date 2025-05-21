@@ -1,5 +1,11 @@
-![image](https://github.com/user-attachments/assets/0df23041-1548-4c94-bf1e-c5a203139d90)
+AXI GPIO設定
+![image](https://github.com/user-attachments/assets/cf2733da-46a6-4668-bbcb-1f3d791d0888)
+
+ZYNQ設定
+![image](https://github.com/user-attachments/assets/77c16ed1-e9dc-4b68-9d22-223a13bf2943)
 
 
-GPIO中斷服務接角
-![image](https://github.com/user-attachments/assets/42c582a1-fb4e-4c1c-91d6-88c1f9569e36)
+
+design
+![image](https://github.com/user-attachments/assets/230c0117-2c2e-4ced-b7a9-fc1166440759)
+

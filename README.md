@@ -23,12 +23,10 @@
 
 ### 硬體配置
 
-* 將按鈕與 LED 連接至 AXI GPIO 相對應的管腳（請參考 Vivado 專案中的管腳配置）。
-* 按鈕須接於 channel 1、LED 接於 channel 2。
+* 將按鈕與 LED 連接至 AXI GPIO 相對應的管腳
 
 ### 軟體編譯與下載
 
-* 於 Vitis/Vivado SDK 匯入本專案，確認 `xparameters.h` 參數對應正確。
 * 編譯無誤後下載至開發板。
 * 開啟 UART/Serial 終端，觀察 `xil_printf` 的訊息輸出。
 

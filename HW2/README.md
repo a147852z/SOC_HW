@@ -51,3 +51,20 @@
 
 ## demo影片連結 https://youtu.be/vo342awh1ts
 * 拉一下代表中斷一次
+
+
+
+
+
+
+# IRQ numbers
+![image](https://github.com/user-attachments/assets/bb6d2be1-e7c2-4847-a724-83d0c74f4155)
+
+# IRQ ID Port
+![image](https://github.com/user-attachments/assets/89d49c4d-5e03-4971-9e13-86b11de1b415)
+
+# Pending Register
+![image](https://github.com/user-attachments/assets/59bfd201-94d3-43e1-8fc6-8015beeed611)
+
+# Disable / Mask Register
+![image](https://github.com/user-attachments/assets/f30f481d-385b-42e6-8080-6706c9990d46)
